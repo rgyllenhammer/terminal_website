@@ -121,7 +121,7 @@
 		<script>
 		var funcs = [
 		'hello [name] ',
-		'addlink [name] [url] ',
+		'addlink [name] [url] [topic] ',
 		'addtodo [name] [description] ',
 		'remove [uid] ',
 		'whoami',
@@ -244,6 +244,15 @@
 					},
 
 					addlink: function(title, url, topic){
+
+						var topics = ["pleasure", "school", "other"];
+
+
+						if (topics.indexOf(topic) == -1){
+							this.error("ERROR: Topic [" + topic + "] is not in:\n" + topics.join('\n'));
+							return
+						}
+
 						var uid = getUID();
 						var obj = {
 							"uid": uid.toString(),
