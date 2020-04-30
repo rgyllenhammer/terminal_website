@@ -1,0 +1,123 @@
+@font-face {
+	font-family: 'Roboto Mono';
+	src: local('Roboto Mono'), local('RobotoMono-Regular'), url('../fonts/RobotoMono-Regular.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'Roboto Mono';
+	src: local('Roboto Mono Medium'), local('RobotoMono-Medium'), url('../fonts/RobotoMono-Medium.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 500;
+
+}
+
+body{
+	color: white;
+	height: 100%;
+	font-family: 'Roboto Mono', monospace;
+	background-color: blue;
+}
+
+#dateHeader{
+	text-align: center;
+	font-size: 50px;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+
+#mainBox{
+	border: 2px solid white;
+	margin-left: 5%;
+	margin-right: 5%;
+	height: 70%;
+	width: 90%;
+}
+
+#linkBox{
+
+}
+
+#todoBox{
+
+}
+
+#termBox{
+	border-left: 2px solid white;
+	border-right: 2px solid white;
+}
+
+.box{
+	width: 33.10%;
+	height: 100%;
+	float: left;
+	overflow-y: auto;
+}
+
+.boxHeader{
+	font-size: 20px;
+	text-align: center;
+	margin-bottom: 4%;
+}
+
+.linkHeader{
+	text-decoration: underline;
+	font-size: 15px;
+}
+
+.linkAddr{
+	color: hotpink;
+	float: right;
+}
+
+#linkContainer{
+	width: 70%;
+}
+
+.linkBody{
+	float: left;
+}
+
+.username{
+	float: left;
+}
+
+.direct{
+	color: hotpink;
+	float: left;
+	margin-left: 2%;
+}
+
+.delimeter{
+	float: left;
+	margin-left: 2%;
+}
+
+.listLink{
+	color: white;
+	text-decoration: none;
+}
+
+.listLink:hover{
+	color: hotpink;
+}
+
+
+
+.shellLine{
+
+}
+
+table{
+	margin-right: 3px;
+}
+
+td{
+	border: 2px solid white;
+}
+
+.uidTD{
+	border: none;
+	color: hotpink;
+}

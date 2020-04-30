@@ -1,0 +1,275 @@
+<html>
+	<head>
+		 <link rel = "stylesheet" type = "text/css" href = "./static/css/main.css" />
+		 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		 <script src="./jquery.terminal/js/jquery.terminal.js"></script>
+		 <link rel="stylesheet" href="./jquery.terminal/css/jquery.terminal.css"/>
+	</head>
+
+
+	<body>
+		<div id="dateHeader">
+
+		</div>
+		<div id="mainBox">
+			<div class="box" id="linkBox">
+				<div class="boxHeader">
+					Links
+				</div>
+				<div id="linkContainer">
+				<ul id="pleasure"> <div class="linkHeader"> Pleasure </div>
+					<li> <div class="linkBody"> <a class="listLink" href="https://reddit.com"> [reddit] </a> </div> <div class="linkAddr"> (uid: 37907) </div> </li>
+					<li> <div class="linkBody"> <a class="listLink" href="https://4chan.org"> [4chan] </a> </div> <div class="linkAddr"> (uid: 90865) </div> </li>
+					<li> <div class="linkBody"> <a class="listLink" href="https://youtube.com"> [youtube] </a> </div> <div class="linkAddr"> (uid: 78012) </div> </li>
+
+				</ul>
+
+				<ul id="school"> <div class="linkHeader"> School </div>
+					<li> <div class="linkBody"> <a class="listLink" href="https://piazza.com"> [piazza] </a> </div> <div class="linkAddr"> (uid: 14376) </div> </li>
+					<li> <div class="linkBody"> <a class="listLink" href="https://bcourses.berkeley.edu"> [bcourse] </a> </div> <div class="linkAddr"> (uid: 90775) </div> </li>
+					<li> <div class="linkBody"> <a class="listLink" href="https://leetcode.com"> [leetcode] </a> </div> <div class="linkAddr"> (uid: 48534) </div> </li>
+
+				</ul>
+
+				<ul id="other"> <div class="linkHeader"> Other </div>
+					<li> <div class="linkBody"> <a class="listLink" href="https://alltimers.com"> [alltimer] </a> </div> <div class="linkAddr"> (uid: 60853) </div> </li>
+					<li> <div class="linkBody"> <a class="listLink" href="https://amazon.com"> [amazon] </a> </div> <div class="linkAddr"> (uid: 71354) </div> </li>
+					<li> <div class="linkBody"> <a class="listLink" href="https://www.bronze56k.com"> [bronze] </a> </div> <div class="linkAddr"> (uid: 77321) </div> </li>
+
+				</ul>
+				</div>
+
+			</div>
+			<div class="box" id="termBox">
+				<div class="boxHeader">
+					Terminal
+				</div>
+				<div id="terminalShell"> </div>
+			</div>
+
+
+			<div class="box" id="todoBox">
+				<div class="boxHeader">
+					ToDo
+				</div>
+				<table id="todoTable">
+					<tr>
+						<th>
+							Title
+						</td>
+						<th>
+							Description
+						</th>
+						<th class= "uidTD">
+							uid
+						</th>
+					</tr>
+
+					<tr>
+						<td>
+							Finish 161 Homework
+						</td>
+						<td>
+							Gradescope due at midnight tomorrow
+						</td>
+						<td class="uidTD">
+							89765
+						</td>
+					<tr>
+						<td>
+							Start studying for finals
+						</td>
+						<td>
+							CS161: Tuesday, Swedish: Wednesday, Math: Friday
+						</td>
+						<td class="uidTD">
+							89765
+						</td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+
+		<script>
+
+		document.getElementById("dateHeader").innerHTML = getDate();
+
+		function getDate(){
+			var date = new Date();
+			var hours = date.getHours();
+			var minutes = date.getMinutes();
+			var ampm = hours >= 12 ? 'PM' : 'AM';
+			hours = hours % 12;
+			hours = hours ? hours : 12; // the hour '0' should be '12'
+			minutes = minutes < 10 ? '0'+minutes : minutes;
+			var strTime = hours + ':' + minutes + ' ' + ampm;
+
+			return strTime
+
+		}
+
+		window.setInterval(function(){
+
+				var dateHead = document.getElementById('dateHeader');
+				dateHead.innerHTML = getDate();
+
+		}, 1000)
+
+		</script>
+
+		<script>
+		var funcs = [
+		'hello [name] ',
+		'addlink [name] [url] ',
+		'addtodo [name] [description] ',
+		'remove [uid] ',
+		'whoami',
+		'clear'
+	];
+
+	var dataObjects = [
+		{
+			"uid":"89765",
+			"type":"todo",
+			"title": "Finish 161 Homework",
+			"description": "Gradescope due at midnight tomorrow"
+		},
+
+		{
+			"uid":"27928",
+			"type":"todo",
+			"title": "Start studying for finals",
+			"description": "CS161: Tuesday, Swedish: Wednesday, Math: Friday"
+		}
+	]
+
+	function getUID(){
+		// TODO CHECK IF  UID ALREADY EXISTS
+
+		return Math.floor(Math.random()*90000) + 10000;;
+	}
+
+	function updateHTML(){
+
+		var htmlString = '<tr><th>Title</td><th>Description</th><th class= "uidTD">uid</th></tr>';
+
+		for(var index in dataObjects){
+			var obj = dataObjects[index];
+			if (obj["type"] === "todo"){
+				var title = obj["title"];
+				var description = obj["description"];
+				var uid = obj["uid"];
+
+				htmlString += tableRowString(title, description, uid);
+			}
+
+			else if (obj["type"] == "link"){
+
+			}
+		}
+		updateTable(htmlString)
+	}
+
+	// function formatTableString(title, description, uid){
+	// 	return '<tr> <td>' + title + '</td> <td>' +  description + '</td> <td class="uidTD">' +  uid + '</td> </tr>';
+	// }
+
+	function tableRowString(title, description, uid){
+		return '<tr> <td>' + title + '</td> <td>' +  description + '</td> <td class="uidTD">' +  uid + '</td> </tr>';
+	}
+
+	function listRowString(title, description, uid){
+		return '<li> <div class="linkBody"> <a target="_blank" class="listLink" href="' + description + '"> [' + title + '] </div> <div class="linkAddr"> (uid: '+ uid+ ') </div> </li>';
+	}
+
+	function updateTable(htmlString){
+		var table = document.getElementById('todoTable');
+		table.innerHTML = htmlString;
+	}
+
+	function updateList(topicList, htmlString){
+		topicList.innerHTML = htmlString
+	}
+
+			$('#terminalShell').terminal({
+
+			    hello: function(what) {
+			        this.echo('Hello, ' + what +
+			                  '. Wellcome to this terminal.');
+			    },
+
+					help: function(){
+						this.echo('\nHello there! Here are a list of all commands! \n\n' + funcs.join('\n') + '\n\n');
+					},
+
+					whoami: function(){
+						this.echo('\nWell... this is a bit of an abuse of notation \n as I am about to give you facts about me, \n not about you... but oh well \n\n I am Reese Gyllenhammer, a developer from \n UC Berkeley.')
+					},
+
+					addlink: function(name, url){
+						this.echo('\nADDING LINK: ['+name + '](' + url + ')\n')
+					},
+
+					addtodo: function(title, description){
+
+						var uid = getUID();
+						var obj = {
+							"uid": uid.toString(),
+							"type": "todo",
+							"title": title,
+							"description": description,
+							"topic": 0
+						}
+
+						dataObjects.push(obj)
+
+
+						var htmlString = document.getElementById('todoTable').innerHTML + tableRowString(title, description, uid);
+						updateTable(htmlString);
+
+						this.echo('\nADDING TODO:\nTitle: ' + title + '\nDescription: ' + description + '\n')
+					},
+
+					remove: function(uid){
+						this.echo('\nDELETING UID: ' + uid + '\n');
+
+						for (var i = 0; i < dataObjects.length; i++){
+							if (dataObjects[i]["uid"] == uid){
+								dataObjects.splice(i, 1);
+							}
+						}
+
+						updateHTML();
+					},
+
+					addlink: function(title, url, topic){
+						var uid = getUID();
+						var obj = {
+							"uid": uid.toString(),
+							"type": "link",
+							"title": title,
+							"description": url,
+							"topic": topic
+						}
+
+						dataObjects.push(obj)
+						// TODO ADD CHECK IF DOCUMENT.GETELEMENTBYID RETURNS NULL AKA TOPIC DOES NOT EXIST
+
+						var list = document.getElementById(topic);
+						var htmlString =  list.innerHTML + listRowString(title, url, uid);
+
+						console.log(htmlString);
+						updateList(list, htmlString);
+
+						this.echo('\nADDING LINK:\nTitle: ' + title + '\nURL: ' + url + '\n')
+					}
+
+			}, {
+			    greetings: 'Type help for more options'
+			});
+
+		</script>
+	</body>
+
+</html>
